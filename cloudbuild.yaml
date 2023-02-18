@@ -13,3 +13,6 @@ steps:
     args: ['run', 'deploy', 'terraform-template-${SHORT_SHA}',
            '--image=asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/terraform-template:$SHORT_SHA',
            '--region', 'asia-northeast1', '--platform', 'managed']
+
+images:
+  - asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/terraform-template:$SHORT_SHA
