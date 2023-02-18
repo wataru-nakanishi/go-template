@@ -2,17 +2,17 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t',
-         'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/terraform-template:$SHORT_SHA', '.']
+         'asia-northeast1-docker.pkg.dev/$PROJECT_ID/terraform-template/image:$SHORT_SHA', '.']
 
 # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/terraform-template:$SHORT_SHA']
+    args: ['push', 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/terraform-template/image:$SHORT_SHA']
 
 # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'terraform-template-${SHORT_SHA}',
-           '--image=asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/terraform-template:$SHORT_SHA',
+           '--image=asia-northeast1-docker.pkg.dev/$PROJECT_ID/terraform-template/image:$SHORT_SHA',
            '--region', 'asia-northeast1', '--platform', 'managed']
 
 images:
-  - asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/terraform-template:$SHORT_SHA
+  - asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/terraform-template/image:$SHORT_SHA
