@@ -16,7 +16,9 @@ RUN go mod download
 COPY . ./
 
 # Build the binary.
-RUN go build -v -o server
+RUN CGO_ENABLED=0 go build -v -o server
+
+EXPOSE 8080
 
 # Use the official Debian slim image for a lean production container.
 # https://hub.docker.com/_/debian
