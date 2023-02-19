@@ -10,7 +10,7 @@ steps:
 
 # Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'terraform-template-${SHORT_SHA}',
+    args: ['run', 'deploy', '$_SERVICE_NAME',
            '--image=$_GCR_HOSTNAME/$PROJECT_ID/terraform-template/image:$SHORT_SHA',
            '--region', '$_DEPLOY_REGION', '--platform', 'managed']
 
@@ -20,3 +20,4 @@ images:
 substitutions:
   _GCR_HOSTNAME: asia-northeast1-docker.pkg.dev
   _DEPLOY_REGION: asia-northeast1
+  _SERVICE_NAME: terraform-template
